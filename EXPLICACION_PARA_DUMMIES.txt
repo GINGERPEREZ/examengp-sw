@@ -1,0 +1,70 @@
+# ¿Qué hace este proyecto? (Explicación para Dummies)
+
+Este proyecto es una **API REST** para gestionar una aplicación de tarjetas de estudio (flashcards), como las que usas para aprender vocabulario, conceptos o prepararte para exámenes.
+
+## ¿Qué es una API REST?
+Una API es como un camarero: recibe tus pedidos (requests), los lleva a la cocina (el servidor), y te trae la comida (la respuesta). REST es una forma estándar de organizar estos pedidos usando URLs y métodos como GET, POST, PUT, DELETE.
+
+## ¿Qué puedes hacer con esta API?
+- Crear usuarios y estudiantes
+- Crear categorías de estudio (por ejemplo: "Ciencia", "Historia")
+- Crear flashcards (cada una tiene una pregunta, respuesta, imagen opcional y categorías)
+- Iniciar sesiones de estudio (por categoría)
+- Registrar cada vez que estudias una flashcard (si la respondiste bien, cuánto tardaste, etc.)
+- Consultar el historial de estudio
+
+## ¿Cómo funciona cada parte?
+
+### 1. Usuarios y Estudiantes
+- **Usuario:** Es quien puede autenticarse y usar la app.
+- **Estudiante:** Es un usuario que estudia flashcards y tiene sesiones de estudio.
+
+### 2. Categorías
+- Sirven para agrupar flashcards por tema.
+- Ejemplo: "Matemáticas", "Inglés", "Ciencia".
+
+### 3. Flashcards
+- Cada flashcard tiene una pregunta, una respuesta, una imagen (opcional) y una o más categorías.
+- Ejemplo: Pregunta: "¿Capital de Francia?" Respuesta: "París".
+
+### 4. Sesiones de Estudio
+- Un estudiante inicia una sesión para estudiar las flashcards de una categoría.
+- Se registra cuándo empieza y termina la sesión.
+
+### 5. Interacciones con Flashcards
+- Cada vez que estudias una flashcard, se guarda:
+  - Qué sesión era
+  - Qué flashcard viste
+  - Si la respondiste
+  - Si fue correcta
+  - Cuánto tiempo tardaste
+- Esto permite analizar tu progreso y aplicar técnicas de memoria espaciada.
+
+## ¿Cómo se usa la API?
+
+### Ejemplo de flujo:
+1. **Crear usuario**: POST `/api/users`
+2. **Crear estudiante**: POST `/api/students` (con el id del usuario)
+3. **Crear categoría**: POST `/api/categories`
+4. **Crear flashcards**: POST `/api/flashcards` (asociadas a categorías)
+5. **Iniciar sesión de estudio**: POST `/api/study-sessions` (con id de estudiante y categoría)
+6. **Obtener flashcards de la sesión**: GET `/api/study-sessions/{id}/flashcards`
+7. **Registrar interacción**: POST `/api/flashcard-interactions` (cada vez que estudias una flashcard)
+8. **Consultar historial**: GET `/api/flashcard-interactions?studySessionId=...`
+
+### ¿Cómo sé qué datos enviar y recibir?
+- Puedes ver y probar todos los endpoints en la documentación interactiva (Swagger):
+  - [http://localhost:3000/api-docs](http://localhost:3000/api-docs)
+- Ahí verás ejemplos de request y response para cada endpoint.
+
+## ¿Qué tecnologías usa?
+- **Node.js** y **Express**: para el servidor y las rutas
+- **TypeORM**: para manejar la base de datos PostgreSQL
+- **Docker**: para levantar la base de datos fácilmente
+- **Swagger**: para documentar y probar la API
+
+## ¿Por qué es útil este proyecto?
+- Aprendes cómo se estructura una API profesional
+- Practicas conceptos de bases de datos, relaciones y validaciones
+- Puedes extenderlo para agregar autenticación, estadísticas, o una interfaz web
+- Es una base perfecta para proyectos de aprendizaje, portafolio o prácticas de arquitectura limpia
